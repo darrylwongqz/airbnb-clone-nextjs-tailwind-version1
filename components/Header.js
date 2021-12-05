@@ -27,7 +27,7 @@ const Header = () => {
     <header
       className={
         transparentNav
-          ? `fixed top-0 z-50 grid items-center grid-cols-3 p-5 bg-white shadow-md md:px-10 header w-full active-header`
+          ? `fixed top-0 z-50 grid items-center grid-cols-3 p-5 bg-white shadow-md md:px-10 header w-full duration-500 transition-colors`
           : `fixed top-0 z-50 grid items-center grid-cols-3 p-5 md:px-10 header w-full`
       }
     >
