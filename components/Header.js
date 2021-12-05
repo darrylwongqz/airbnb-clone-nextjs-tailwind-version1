@@ -6,12 +6,33 @@ import {
   UserCircleIcon,
   UsersIcon,
 } from "@heroicons/react/solid";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [transparentNav, setTransparentNav] = useState(false);
+
+  const changeNavBackground = () => {
+    if (window.scrollY >= 200) {
+      setTransparentNav(true);
+    } else {
+      setTransparentNav(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeNavBackground);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
+    <header
+      className={
+        transparentNav
+          ? `fixed top-0 z-50 grid items-center grid-cols-3 p-5 bg-white shadow-md md:px-10 header w-full active-header`
+          : `fixed top-0 z-50 grid items-center grid-cols-3 p-5 md:px-10 header w-full`
+      }
+    >
       {/* Left */}
-      <div className="relative flex items-center h-10 cursor-pointer my-auto">
+      <div className="relative flex items-center h-10 my-auto cursor-pointer">
         <Image
           src="https://i.ibb.co/BfWhx1n/Airbnb-Logo-B-lo-svg.png"
           alt="Airbnb logo"
@@ -22,21 +43,31 @@ const Header = () => {
       </div>
 
       {/* Middle - search bar */}
-      <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm">
+      <div className="flex items-center py-2 rounded-full md:border-2 md:shadow-sm">
         <input
-          className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
           type="text"
           placeholder="Start your search"
+          className={
+            transparentNav
+              ? `flex-grow pl-5 text-gray-600 placeholder-gray-400 bg-transparent outline-none duration-500 transition-colors`
+              : `flex-grow pl-5 text-white placeholder-white bg-transparent outline-none`
+          }
         />
-        <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
+        <SearchIcon className="hidden h-8 p-2 text-white bg-red-400 rounded-full cursor-pointer md:inline-flex md:mx-2" />
       </div>
 
       {/* Right */}
-      <div className="flex items-center space-x-4 justify-end text-gray-500">
-        <p className="cursor-pointer hidden md:inline">Become a host</p>
+      <div
+        className={
+          transparentNav
+            ? `flex items-center justify-end space-x-4 text-gray-500 duration-500 transition-colors`
+            : `flex items-center justify-end space-x-4 text-white`
+        }
+      >
+        <p className="hidden cursor-pointer md:inline">Become a host</p>
         <GlobeAltIcon class="h-6 cursor-pointer" />
 
-        <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
+        <div className="flex items-center p-2 space-x-2 border-2 rounded-full">
           <MenuIcon className="h-6" />
           <UserCircleIcon className="h-6" />
         </div>

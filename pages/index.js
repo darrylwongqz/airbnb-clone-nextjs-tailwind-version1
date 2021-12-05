@@ -1,3 +1,4 @@
+import axios from "axios";
 import Head from "next/head";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
@@ -23,10 +24,10 @@ const Home = ({ exploreData, cardsData }) => {
       <Banner />
 
       {/* Below Banner - Main Section */}
-      <main className="max-w-7xl mx-auto px-8 sm:px-16">
+      <main className="px-8 mx-auto max-w-7xl sm:px-16">
         {/* Small Cards */}
         <section className="pt-6">
-          <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
+          <h2 className="pb-5 text-4xl font-semibold">Explore Nearby</h2>
 
           {/* Pull data from a server through API endpoints */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -43,9 +44,9 @@ const Home = ({ exploreData, cardsData }) => {
 
         {/* Medium Cards */}
         <section>
-          <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
+          <h2 className="py-8 text-4xl font-semibold">Live Anywhere</h2>
 
-          <div className="flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3">
+          <div className="flex p-3 -ml-3 space-x-3 overflow-scroll scrollbar-hide">
             {cardsData?.map(({ img, title }) => (
               <MediumCard key={img} img={img} title={title} />
             ))}
@@ -70,13 +71,9 @@ const Home = ({ exploreData, cardsData }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  const exploreData = await fetch("https://jsonkeeper.com/b/I9ZO").then((res) =>
-    res.json()
-  );
+  const exploreData = (await axios.get("https://jsonkeeper.com/b/I9ZO")).data;
 
-  const cardsData = await fetch("https://jsonkeeper.com/b/ZQ1K").then((res) =>
-    res.json()
-  );
+  const cardsData = (await axios.get("https://jsonkeeper.com/b/ZQ1K")).data;
 
   return {
     props: {

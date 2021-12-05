@@ -4,16 +4,18 @@ const Banner = () => {
   return (
     <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px]">
       <Image
-        src="https://i.ibb.co/TP38hkD/0fm.jpg"
+        // src="https://i.ibb.co/TP38hkD/0fm.jpg"
+        src="/banner.jpg"
         layout="fill"
         objectFit="cover"
+        className="brightness-50"
       />
-      <div className="absolute top-1/2 w-full text-center">
-        <p className="text-sm sm:text-lg font-semibold">
+      <div className="absolute w-full text-center top-1/2">
+        <p className="text-sm font-semibold text-white sm:text-lg">
           Not sure where to go? Perfect.
         </p>
 
-        <button className="text-purple-500 font-bold bg-white px-10 py-4 shadow-md rounded-full my-3 hover:shadow-xl active:scale-90 transition duration-150">
+        <button className="px-10 py-4 my-3 font-bold text-purple-500 transition duration-150 bg-white rounded-full shadow-md hover:shadow-xl active:scale-90">
           I'm flexible
         </button>
       </div>
